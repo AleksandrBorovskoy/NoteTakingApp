@@ -1,0 +1,18 @@
+﻿@page
+@model NoteTakingApp.Pages.LogoutModel
+@{
+}
+
+
+<form method="post">
+    <div class="container pt-5">
+        <div class="mx-auto w-25 text-center fs-3">
+            Are you sure you want to <strong>logout</strong>?
+        </div>
+
+        <div class="mx-auto w-25 mt-3 d-flex justify-content-between">
+            <input type="submit" value="Yes" class="btn btn-primary btn-lg ms-3" asp-page-handler="Logout"/>
+            <input type="submit" value="No" class="btn btn-light btn-lg border-dark me-3" asp-page-handler="Stay"/>
+        </div>
+    </div>
+</form>

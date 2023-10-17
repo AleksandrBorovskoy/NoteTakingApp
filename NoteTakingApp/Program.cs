@@ -8,6 +8,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<NoteDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("NoteAppConnectionString")));
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<NoteDbContext>();
+builder.Services.ConfigureApplicationCookie(config =>
+{
+    config.LoginPath = "/Login";
+});
 
 var app = builder.Build();
 

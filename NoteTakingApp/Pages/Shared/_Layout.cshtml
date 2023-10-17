@@ -1,6 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
+@using NoteTakingApp.Entities
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
 
 <!DOCTYPE html>
 <html lang="en">
@@ -38,7 +39,7 @@
                             @{
                                 var user = await UserManager.GetUserAsync(User);
                                 <li class="d-flex nav-item align-items-center">
-                                    Hello, @user.UserName
+                                    Hello, @user.UserName!
                                 </li>
                             }
                            

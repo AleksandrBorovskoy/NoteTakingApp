@@ -1,18 +1,19 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using NoteTakingApp.Entities;
 using NoteTakingApp.ViewModels;
 
 namespace NoteTakingApp.Pages
 {
     public class RegistrationModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
 
         [BindProperty]
         public Registration Model { get; set; } 
-        public RegistrationModel(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        public RegistrationModel(UserManager<User> userManager, SignInManager<User> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -25,7 +26,7 @@ namespace NoteTakingApp.Pages
         {
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser { UserName = Model.Name, Email = Model.Email };
+                var user = new User { UserName = Model.Name, Email = Model.Email };
                 var result = await _userManager.CreateAsync(user, Model.Password);
 
                 if (result.Succeeded)

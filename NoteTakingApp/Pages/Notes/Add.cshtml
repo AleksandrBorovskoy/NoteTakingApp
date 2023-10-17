@@ -1,0 +1,31 @@
+﻿@page
+@model NoteTakingApp.Pages.Notes.AddModel
+@{
+}
+
+<div class="container pt-5">
+    <form method="post">
+        <div class="row d-flex justify-content-center pt-5">
+            <div class="col-6 p-5 border border-dark" style="border-radius: 15px">
+
+                <div class="mb-3">
+                    <label class="form-label h4" asp-for="Model.Title">Title</label>
+                    <input type="text" class="form-control" placeholder="Your title" asp-for="Model.Title" />
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label h4" asp-for="Model.Description">Description</label>
+                    <textarea class="form-control" placeholder="Leave a comment here" asp-for="Model.Description" style="height: 150px"></textarea>
+                </div>
+
+                <div class="mb-3 d-flex justify-content-between">
+                    <button type="submit" class="btn btn-lg btn-primary">Save</button>
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </div>
+
+            </div>
+
+        </div>
+        
+    </form>
+</div>

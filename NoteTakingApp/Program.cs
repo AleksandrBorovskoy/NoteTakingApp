@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using NoteTakingApp.Entities;
 using NoteTakingApp.Model;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<NoteDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("NoteAppConnectionString")));
-builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<NoteDbContext>();
+builder.Services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<NoteDbContext>();
 builder.Services.ConfigureApplicationCookie(config =>
 {
     config.LoginPath = "/Login";

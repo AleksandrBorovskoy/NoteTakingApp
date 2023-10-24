@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using NoteTakingApp.Entities;
 using NoteTakingApp.Model;
+using NoteTakingApp.ViewModels;
 
 namespace NoteTakingApp.Pages
 {
@@ -13,7 +14,7 @@ namespace NoteTakingApp.Pages
     {
         private readonly NoteDbContext _dbContext;
         private readonly UserManager<User> _userManager;
-        public List<Note> Notes { get; set; } = new List<Note>();
+        public PaginatedList<Note> Notes { get; set; } = new PaginatedList<Note>();
 
         public IndexModel(NoteDbContext dbContext, UserManager<User> userManager)
         {
@@ -21,12 +22,13 @@ namespace NoteTakingApp.Pages
             _userManager = userManager;
         }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(int pageIndex = 1)
         {
+            
             var currentUser = await _userManager.GetUserAsync(User);
-            var notes = await _dbContext.Notes.Where(n => n.UserId == currentUser.Id).ToListAsync();
+            var notes = _dbContext.Notes.Where(n => n.UserId == currentUser.Id);
 
-            if (notes.Count > 0)
+            if (notes.Any())
             {
                 foreach (var note in notes)
                 {
@@ -38,7 +40,9 @@ namespace NoteTakingApp.Pages
                 }
             }
 
-            Notes = notes;
+            int pageSize = 12;
+
+            Notes = await PaginatedList<Note>.CreateAsync(notes, pageSize, pageIndex);
         }
 
         public async Task<IActionResult> OnPostDeleteAsync(int noteId)

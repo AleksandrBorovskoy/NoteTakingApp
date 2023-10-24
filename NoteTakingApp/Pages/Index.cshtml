@@ -1,4 +1,4 @@
-﻿@page
+﻿@page 
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
@@ -43,4 +43,12 @@
             }
         </tbody>
     </table>
+
+    @{
+        var prevDisabled = !Model.Notes.HasPreviousPage ? "disabled" : "";
+        var nextDisabled = !Model.Notes.HasNextPage ? "disabled" : "";
+    }
+
+    <a asp-page="Index" asp-route-pageIndex="@(Model.Notes.PageIndex-1)" class="btn btn-primary @prevDisabled">Previous</a>
+    <a asp-page="Index" asp-route-pageIndex="@(Model.Notes.PageIndex+1)" class="btn btn-primary @nextDisabled">Next</a>
 </div>

@@ -1,8 +1,13 @@
-﻿namespace NoteTakingApp.ViewModels
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace NoteTakingApp.ViewModels
 {
     public class Add
     {
+        public int NoteId { get; set; }
+        [Required]
         public string Title { get; set; }
+        [Required]
         public string Description { get; set; }
     }
 }

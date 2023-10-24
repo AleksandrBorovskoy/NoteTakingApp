@@ -2,9 +2,45 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
+    int count = 1;
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="bg-secondary bg-opacity-10 py-2 mb-2">
+    <div class="container d-flex align-items-center">
+        <h1>Notes</h1>
+        <a asp-page="/Notes/Add" class="btn btn-primary ms-3" style="font-size:14px">Add new</a>
+    </div>
+</div>
+
+<div class="container">
+    <table class="table table-hover border-dark align-middle">
+        <thead>
+            <tr>
+                <td>#</td>
+                <td>Title</td>
+                <td>Description</td>
+                <td></td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var note in Model.Notes)
+            {
+                <tr>
+                    <td>@(count++)</td>
+                    <td>@note.Title</td>
+                    <td>@note.Description</td>
+                    <td>
+                        <a class="btn btn-sm btn-info" asp-page="/Notes/Update" asp-route-noteId="@note.Id">View</a>
+                    </td>
+                    <td>
+                        <form method="post" asp-page-handler="Delete">
+                            <input type="hidden" name="noteId" value="@note.Id" />
+                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>

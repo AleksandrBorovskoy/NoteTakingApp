@@ -1,5 +1,5 @@
 ﻿@page
-@model NoteTakingApp.Pages.Notes.AddModel
+@model NoteTakingApp.Pages.Notes.UpdateModel
 @{
 }
 
@@ -10,24 +10,24 @@
 
                 <div class="mb-3">
                     <label class="form-label h4" asp-for="Model.Title">Title</label>
-                    <input type="text" class="form-control" placeholder="Your title" asp-for="Model.Title" />
+                    <input type="text" class="form-control" placeholder="Your title" asp-for="Model.Title" value="@Model.Model.Title"/>
                     <span class="text-danger" asp-validation-for="Model.Title"></span>
                 </div>
 
                 <div class="mb-4">
                     <label class="form-label h4" asp-for="Model.Description">Description</label>
-                    <textarea class="form-control" placeholder="Leave a comment here" asp-for="Model.Description" style="height: 150px"></textarea>
+                    <textarea class="form-control" placeholder="Leave a comment here" asp-for="Model.Description" style="height: 150px">@Model.Model.Description</textarea>
                     <span class="text-danger" asp-validation-for="Model.Description"></span>
                 </div>
 
-                <div class="mb-3 d-flex justify-content-between">
-                    <button type="submit" class="btn btn-lg btn-primary" asp-page-handler="Save">Save</button>
-                    <button type="submit" class="btn btn-danger" asp-page-handler="Delete">Delete</button>
+                <div class="mb-3 d-flex justify-content-center">
+                    <input type="hidden" asp-for="Model.NoteId"/>
+                    <button type="submit" class="btn btn-lg btn-primary" asp-page-handler="Update">Update</button>
                 </div>
 
             </div>
 
         </div>
-        
+
     </form>
 </div>
